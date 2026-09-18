@@ -1,0 +1,65 @@
+---
+title: "Los cantones de Costa Rica"
+author: "Isabel Chumi"
+date: 2026-09-10
+lang: es
+theme: Cyborg
+format:
+  html:
+    toc: true
+    embed-resources: true
+---
+
+## Introducción
+
+Este documento calcula la **densidad de población** de los 84 cantones de Costa Rica a partir de la población y el área publicadas por el [INEC](https://inec.cr/) (Estimación de Población y Vivienda 2022).
+
+## Datos
+
+```{r}
+#| label: importacion
+
+#cantones <- read.csv("https://raw.githubusercontent.com/pf0953-programacionr/2026-ii/main/datos/cantones.csv")
+cantones <- read.csv ("datos/cantones.csv")
+cantones$densidad <- cantones$poblacion / cantones$area_km2
+```
+
+## Los cantones más densos
+
+```{r}
+#| label: mas-densos
+#| echo: false
+mas_densos <- cantones[order(-cantones$densidad), c("canton", "provincia", "densidad")]
+head(mas_densos, 5)
+```
+
+## Cantidad de cantones 
+
+```{r}
+#| label: cantidad-cantones
+#| echo: false
+
+cat(nrow(cantones))
+```
+
+##Poblacion total del pais 
+
+```{r}
+#| label: suma-poblacion
+#| echo: false
+
+cat(sum(cantones$poblacion))
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
